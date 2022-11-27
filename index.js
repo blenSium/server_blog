@@ -10,13 +10,14 @@ const app = express();
 const port = 8000;
 app.use(express.json());
 app.use(cors())
+app.use(express.static('public'));
 
 const storage = multer.diskStorage({
     destination:(req,file,cb)=>{
-        cb(null,"./upload")
+        cb(null,"./public/images")
     },
     filename:(req,file,cb)=>{
-        cb(null,new Date().toISOString().replace(/:/g, '-') + file.originalname)
+        cb(null,Date.now() + file.originalname)
     }
   })
 

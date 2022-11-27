@@ -9,7 +9,7 @@ const commentsRouter = require('./routers/commentsRouter')
 const app = express();
 const port = 8000;
 app.use(express.json());
-app.use(cors())
+app.use(cors({origin:"https://recipes-blog-nu.vercel.app"}))
 app.use(express.static('public'));
 
 const storage = multer.diskStorage({

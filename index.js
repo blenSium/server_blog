@@ -11,7 +11,7 @@ const port = 8000;
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://recipes-blog-nu.vercel.app",
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );

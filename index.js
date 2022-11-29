@@ -18,12 +18,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use(
-//   cors({
-//     origin: "*",
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//   })
-// );
 app.use(express.static('public'));
 
 const storage = multer.diskStorage({

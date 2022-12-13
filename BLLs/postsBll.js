@@ -1,4 +1,5 @@
 const postModel = require('../models/postsModel')
+const cloudinary = require("../config/cloudinary")
 
 const getAllPosts = ()=>{
     return postModel.find({})
@@ -13,15 +14,22 @@ const getPostById = (id) => {
   };
   
   const addPost = async (obj) => {
+    const { title, description, recipe, preparation, img, time, userId } = obj
+
     try {
-      const newPost = postModel({
-        title: obj.title,
-        description: obj.description,
-        recipe: obj.recipe,
-        img:obj.img,
-        time:obj.time,
-        userId: obj.userId,
+      const result = await cloudinary.uploader.upload(img, {
+        folder: "recipes",
       });
+  
+      const newPost = await postModel({
+        title,
+        description,
+        recipe,
+        preparation,
+        img: { public_id: result.public_id, url: result.secure_url },
+        time,
+        userId,
+      });;
       await newPost.save();
       return "Created";
     } catch (e) {

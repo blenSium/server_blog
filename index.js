@@ -6,21 +6,23 @@ const usersRouter = require('./routers/usersRouter')
 const postsRouter = require('./routers/postsRouter')
 const coursesRouter = require('./routers/coursesRouter')
 const commentsRouter = require('./routers/commentsRouter')
+const bodyParser = require('body-parser')
 
 const app = express();
 const port = 8000;
-app.use(express.json());
+app.use(bodyParser.json({ limit: "50mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors())
-app.use(express.static('public'));
+// app.use(express.static('public'));
 
-const storage = multer.diskStorage({
-    destination:(req,file,cb)=>{
-        cb(null,"./public/images")
-    },
-    filename:(req,file,cb)=>{
-        cb(null,Date.now() + file.originalname)
-    }
-  })
+// const storage = multer.diskStorage({
+//     destination:(req,file,cb)=>{
+//         cb(null,"./public/images")
+//     },
+//     filename:(req,file,cb)=>{
+//         cb(null,Date.now() + file.originalname)
+//     }
+//   })
 
 const upload = multer({storage: storage})
 

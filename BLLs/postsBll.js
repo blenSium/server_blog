@@ -1,5 +1,6 @@
 const postModel = require('../models/postsModel')
-const cloudinary = require("../config/cloudinary")
+const cloudinary = require("../utils/cloudinary");
+
 
 const getAllPosts = ()=>{
     return postModel.find({})
